@@ -53,7 +53,7 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
         SuccessLogin();
     }
 
-    $scope.Login = function () {        
+    var DoLogin = function () {
         if (!isBlank($scope.LoginDetails.Email) && !isBlank($scope.LoginDetails.Password)) {
             $http.post(appGlobalSettings.apiBaseUrl + '/user',
                 JSON.stringify($scope.LoginDetails))
@@ -78,6 +78,11 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
                 $("#ShowError").slideUp('slow');
             }, 3000);
         }
+
+    }
+
+    $scope.Login = function () {
+        DoLogin();
     }
 
     $scope.Register = function () {
@@ -90,7 +95,27 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
             )
         {
             if ($scope.RegisterDetails.Password == $scope.RegisterDetails.Password2) {
-                console.log('Register');
+
+                var register = {
+                    Email: $scope.RegisterDetails.Email,
+                    FirstName: $scope.RegisterDetails.FirstName,
+                    LastName: $scope.RegisterDetails.LastName,
+                    Password: $scope.RegisterDetails.Password
+                };
+
+                $http.put(appGlobalSettings.apiBaseUrl + '/user',
+                    JSON.stringify(register))
+                    .then(function (data) {
+                        $scope.LoginDetails.Email = data.data.Email;
+                        $scope.LoginDetails.Password = $scope.RegisterDetails.Password;
+                        DoLogin();
+                    }, function (error) {
+                        $scope.RegisterError = error.statusText;
+                        $("#ShowRegisterError").slideDown('slow');
+                        setTimeout(function () {
+                            $("#ShowRegisterError").slideUp('slow');
+                        }, 3000);
+                    });
             }
             else {
                 $scope.RegisterError = "Password does not match."
