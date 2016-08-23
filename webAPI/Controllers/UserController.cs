@@ -71,7 +71,7 @@ namespace Auction.API.Controllers
         /// <returns></returns>
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpPost]
-        public async Task<UserToken> Login(RequestLogin user)
+        public async Task<ResponseLogin> Login(RequestLogin user)
         {
             var existingUser = await userRepository.GetUser(user.Email);
             if (existingUser != null)
@@ -86,7 +86,11 @@ namespace Auction.API.Controllers
                         Token = generatedToken
                     };
                     await userTokenRepository.CreateSync(token);
-                    return token;
+                    return new ResponseLogin
+                    {
+                        UserDetails = existingUser,
+                        UserToken = token
+                    };
                 }
             }
             throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)

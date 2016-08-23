@@ -60,12 +60,15 @@
 
             <!-- Top Bar -->
             <div id="topBar">
-                <div class="container">
+                <div class="container" ng-controller="TopBarController">
 
                     <!-- right -->
                     <ul class="top-links list-inline pull-right">
-                        <li class="text-welcome hidden-xs">Welcome to Smarty, <strong>John Doe</strong></li>
-                        <li>
+                        <li ng-show="ShowLogin">
+                            <a class="dropdown-toggle no-text-underline" data-toggle="modal" data-target="#popupLogin" href="#"><i class="fa fa-user hidden-xs"></i> LOGIN</a>
+                        </li>
+                        <li class="text-welcome hidden-xs" ng-show="ShowWelcome">Welcome to Smarty, <strong>{{ UserDetails.Name }}</strong></li>
+                        <li ng-show="ShowAcount">
                             <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i> MY ACCOUNT</a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a tabindex="-1" href="#"><i class="fa fa-history"></i> ORDER HISTORY</a></li>
@@ -80,28 +83,80 @@
                     </ul>
 
                     <!-- left -->
-                    <ul class="top-links list-inline">
-                        <li class="hidden-xs"><a href="page-contact-1.html">CONTACT</a></li>
-                        <li>
-                            <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><img class="flag-lang" src="assets/images/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH</a>
-                            <ul class="dropdown-langs dropdown-menu">
-                                <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH</a></li>
-                                <li class="divider"></li>
-                                <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/de.png" width="16" height="11" alt="lang" /> GERMAN</a></li>
-                                <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/ru.png" width="16" height="11" alt="lang" /> RUSSIAN</a></li>
-                                <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/it.png" width="16" height="11" alt="lang" /> ITALIAN</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">USD</a>
-                            <ul class="dropdown-langs dropdown-menu">
-                                <li><a tabindex="-1" href="#">USD</a></li>
-                                <li class="divider"></li>
-                                <li><a tabindex="-1" href="#">EUR</a></li>
-                                <li><a tabindex="-1" href="#">GBP</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <!--<ul class="top-links list-inline">
+            <li class="hidden-xs"><a href="page-contact-1.html">CONTACT</a></li>
+            <li>
+                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><img class="flag-lang" src="assets/images/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH</a>
+                <ul class="dropdown-langs dropdown-menu">
+                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/us.png" width="16" height="11" alt="lang" /> ENGLISH</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/de.png" width="16" height="11" alt="lang" /> GERMAN</a></li>
+                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/ru.png" width="16" height="11" alt="lang" /> RUSSIAN</a></li>
+                    <li><a tabindex="-1" href="#"><img class="flag-lang" src="assets/images/flags/it.png" width="16" height="11" alt="lang" /> ITALIAN</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">USD</a>
+                <ul class="dropdown-langs dropdown-menu">
+                    <li><a tabindex="-1" href="#">USD</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#">EUR</a></li>
+                    <li><a tabindex="-1" href="#">GBP</a></li>
+                </ul>
+            </li>
+        </ul>-->
+
+
+
+                    <div id="popupLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Register / Sign-in</h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                                        <li><a href="#register" data-toggle="tab">Register</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="login">
+                                            <div class="alert alert-mini alert-danger margin-bottom-30" style="display:none;" id="ShowError">
+                                                {{ LoginError }}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input type="text" class="form-control" ng-model="LoginDetails.Email" placeholder="Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Password</label>
+                                                <input type="password" class="form-control" placeholder="Password" ng-model="LoginDetails.Password">
+                                            </div>
+                                            <button type="button" class="btn btn-primary" ng-click="Login()">Login</button>
+                                        </div>
+                                        <div class="tab-pane fade" id="register">
+                                            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
@@ -309,6 +364,9 @@
 		</div><!-- /PRELOADER -->
 
 
+
+
+
 		<!-- JAVASCRIPT FILES -->
 		<script type="text/javascript">var plugin_path = 'assets/plugins/';</script>
 		<script type="text/javascript" src="assets/plugins/jquery/jquery-2.2.3.min.js"></script>
@@ -325,7 +383,7 @@
 
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-
+        <script src="js/app/common.js"></script>
         <script src="js/app/config.js"></script>
         <script src="js/app/app.js"></script>
 
