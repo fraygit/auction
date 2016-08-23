@@ -53,6 +53,13 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
         SuccessLogin();
     }
 
+    $scope.Logout = function () {
+        sessionStorage.clear();
+        $scope.ShowWelcome = false;
+        $scope.ShowAcount = false;
+        $scope.ShowLogin = true;
+    };
+
     var DoLogin = function () {
         if (!isBlank($scope.LoginDetails.Email) && !isBlank($scope.LoginDetails.Password)) {
             $http.post(appGlobalSettings.apiBaseUrl + '/user',
