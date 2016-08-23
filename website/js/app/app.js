@@ -40,6 +40,7 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
 
     $scope.LoginDetails = {};
     $scope.UserDetails = {};
+    $scope.RegisterDetails = {};
 
     var SuccessLogin = function () {
         $scope.ShowWelcome = true;
@@ -52,9 +53,7 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
         SuccessLogin();
     }
 
-
-    $scope.Login = function () {
-        
+    $scope.Login = function () {        
         if (!isBlank($scope.LoginDetails.Email) && !isBlank($scope.LoginDetails.Password)) {
             $http.post(appGlobalSettings.apiBaseUrl + '/user',
                 JSON.stringify($scope.LoginDetails))
@@ -80,6 +79,35 @@ filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope,
             }, 3000);
         }
     }
+
+    $scope.Register = function () {
+
+        if (!isBlank($scope.RegisterDetails.Email) && 
+            !isBlank($scope.RegisterDetails.Password) && 
+            !isBlank($scope.RegisterDetails.Password2) && 
+            !isBlank($scope.RegisterDetails.FirstName) && 
+            !isBlank($scope.RegisterDetails.LastName)
+            )
+        {
+            if ($scope.RegisterDetails.Password == $scope.RegisterDetails.Password2) {
+                console.log('Register');
+            }
+            else {
+                $scope.RegisterError = "Password does not match."
+                $("#ShowRegisterError").slideDown('slow');
+                setTimeout(function () {
+                    $("#ShowRegisterError").slideUp('slow');
+                }, 3000);
+            }
+        }
+        else {
+            $scope.RegisterError = "Please input all fields."
+            $("#ShowRegisterError").slideDown('slow');
+            setTimeout(function () {
+                $("#ShowRegisterError").slideUp('slow');
+            }, 3000);
+        }
+    };
 
 
 }]);
