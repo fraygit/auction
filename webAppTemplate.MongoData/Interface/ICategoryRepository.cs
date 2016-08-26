@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Auction.MongoData.Interface
 {
-    public interface IParkingRepository : IEntityService<Parking>
+    public interface ICategoryRepository : IEntityService<Category>
     {
-        Task<List<Parking>> GetByUsername(string username);
-        Task<List<Parking>> GetByParkingSpace(string parkingSpaceId);
     }
 }

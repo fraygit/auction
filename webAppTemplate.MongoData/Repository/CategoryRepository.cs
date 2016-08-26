@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Auction.MongoData.Repository
 {
-    public class CreditCardPaymentRepository : EntityService<CreditCardPayments>, ICreditCardPaymentRepository
+    public class CategoryRepository : EntityService<Category>, ICategoryRepository
     {
     }
 }

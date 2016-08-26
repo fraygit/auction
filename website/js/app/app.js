@@ -1,6 +1,6 @@
-﻿var filgiftsApp = angular.module('auctionApp', ['ui.router']);
+﻿var auctionApp = angular.module('auctionApp', ['ui.router']);
 
-filgiftsApp.config(function ($stateProvider, $urlRouterProvider) {
+auctionApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -24,14 +24,15 @@ filgiftsApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/home',
             views: {
                 'container@': {
-                    templateUrl: 'js/app/templates/home.html'
+                    templateUrl: 'js/app/templates/home.html',
+                    controller: 'HomeController'
                 }
             }
         })
 
 });
 
-filgiftsApp.controller('TopBarController', ['$scope', '$http', function ($scope, $http) {
+auctionApp.controller('TopBarController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.ShowWelcome = false;
     $scope.ShowAcount = false;
