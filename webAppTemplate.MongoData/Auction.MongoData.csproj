@@ -57,11 +57,13 @@
     <Compile Include="Interface\IAdminUserRepository.cs" />
     <Compile Include="Interface\IAdminUserTokenRepository.cs" />
     <Compile Include="Interface\ICategoryRepository.cs" />
+    <Compile Include="Interface\IListingRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Interface\IUserTokenRepository.cs" />
     <Compile Include="Model\AdminUser.cs" />
     <Compile Include="Model\AdminUserToken.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Listing.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserCreditCard.cs" />
     <Compile Include="Model\UserToken.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Repository\AdminUserRepository.cs" />
     <Compile Include="Repository\AdminUserTokenRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\ListingRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\UserTokenRepository.cs" />
     <Compile Include="Service\ConnectionHandler.cs" />

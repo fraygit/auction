@@ -1,0 +1,22 @@
+﻿using Auction.MongoData.Entities.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Auction.MongoData.Model
+{
+    public class Listing : MongoEntity
+    {
+        public string Title { get; set; }
+        public string Email { get; set; }
+        public string Description { get; set; }
+        public DateTime DatePosted { get; set; }
+        public DateTime DateExpiry { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
+        public decimal StartingPrice { get; set; }
+        public List<string> Tags { get; set; }
+    }
+}

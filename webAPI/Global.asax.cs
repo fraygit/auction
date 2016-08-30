@@ -20,6 +20,7 @@ namespace Auction.API
             container.Register<IAdminUserRepository, AdminUserRepository>(Lifestyle.Scoped);
             container.Register<IAdminUserTokenRepository, AdminUserTokenRepository>(Lifestyle.Scoped);
             container.Register<ICategoryRepository, CategoryRepository>(Lifestyle.Scoped);
+            container.Register<IListingRepository, ListingRepository>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

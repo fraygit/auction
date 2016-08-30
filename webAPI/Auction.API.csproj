@@ -145,10 +145,14 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ListingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Custom\AuthenticationFailureResult.cs" />
+    <Compile Include="Custom\TokenAuthentication.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HttpRequestMessageExtensions.cs" />
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Models\RequestCreateUser.cs" />
     <Compile Include="Models\RequestLogin.cs" />
