@@ -30,6 +30,16 @@ auctionApp.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
 
+        .state('home.post', {
+            url: '/post',
+            views: {
+                'container@': {
+                    templateUrl: 'js/app/templates/post.html',
+                    controller: 'PostController'
+                }
+            }
+        })
+
 });
 
 auctionApp.controller('TopBarController', ['$scope', '$http', function ($scope, $http) {
